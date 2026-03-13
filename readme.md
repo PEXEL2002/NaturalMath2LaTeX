@@ -1,22 +1,30 @@
 # NaturalMath2LaTeX
 
 ## Opis projektu
-**NaturalMath2LaTeX** to inteligentny edytor i transpilator, który ułatwia pisanie skomplikowanych równań matematycznych w systemie LaTeX (np. dla środowiska Overleaf). Narzędzie pozwala na używanie intuicyjnych skrótów oraz fraz języka naturalnego, które są automatycznie konwertowane na profesjonalną składnię matematyczną.
+**NaturalMath2LaTeX** to inteligentny transpilator zamieniający język naturalny oraz intuicyjne skróty matematyczne na profesjonalny kod **LaTeX**. Narzędzie zostało zaprojektowane, aby uprościć proces pisania skomplikowanych równań w edytorach takich jak Overleaf, eliminując konieczność ręcznego wpisywania żmudnych komend systemowych.
 
 ## Kluczowe funkcjonalności
-* **Intuicyjne ułamki:** Zamiana zapisu `a/b` lub `(x+1)/(y-1)` na strukturę `\frac{}{}`.
-* **Interpreter analizy matematycznej:** Obsługa fraz typu `calka x^2`, `granica n do nieskonczonosci` czy `suma i=0 do 10`.
-* **Automatyczne symbole:** Konwersja nazw greckich liter (np. `delta`, `pi`) na ich odpowiedniki LaTeXowe.
-* **Obsługa zagnieżdżeń:** Poprawne przetwarzanie złożonych struktur, np. pierwiastków wewnątrz ułamków.
+* **Analiza Matematyczna:** Zaawansowana obsługa całek, granic, sum oraz iloczynów wielokrotnych.
+* **Logika i Zbiory:** Przetwarzanie naturalnych spójników (i, lub, nie) na symbole logiczne oraz obsługę teorii zbiorów.
+<!--
+* **Obsługa zagnieżdżeń:** Dzięki wykorzystaniu drzewa składniowego (AST), narzędzie pozwala na dowolne zagnieżdżanie struktur (np. całka w liczniku ułamka).
+* **Operator `//` (Smart Fraction):** Intuicyjne tworzenie ułamków pionowych przy zachowaniu standardowego dzielenia liniowego `/`.
+-->
+## Przykłady użycia
 
-## Technologia
-* **Parser Generator:** ANTLR v4 (do analizy struktury wyrażeń matematycznych).
-* **Język implementacji:** Java.
-* **Format wyjściowy:** Tekst zgodny ze standardem LaTeX (AmsMath).
-
-## Przykład działania
-| Wejście (Skrót) | Wyjście (LaTeX) | Render |
+### 1. Analiza Matematyczna i Iteratory
+| Wejście skrótowe | Wyjście LaTeX | Przykładowy render |
 | :--- | :--- | :--- |
-| `a/b` | `\frac{a}{b}` | $$\frac{a}{b}$$ |
-| `calka sin(x)` | `\int \sin(x) \,dx` | $$\int \sin(x) \,dx$$ |
-| `suma n=1 do 10 n^2` | `\sum_{n=1}^{10} n^2` | $$\sum_{n=1}^{10} n^2$$ |
+| `calka sin(x)` | `\int \sin(x) dx` | $$\int \sin(x) dx$$ |
+| `calka od 0 do pi sin(x) po x` | `\int_{0}^{\pi} \sin(x) dx` | $$\int_{0}^{\pi} \sin(x) dx$$ |
+| `granica n -> inf (1/n)` | `\lim_{n \to \infty} (\frac{1}{n})` | $$\lim_{n \to \infty} (\frac{1}{n})$$ |
+| `suma n=1 do inf (1//n^2)` | `\sum_{n=1}^{\infty} \frac{1}{n^2}` | $$\sum_{n=1}^{\infty} \frac{1}{n^2}$$ |
+| `iloczyn k=1 do n (x+k)` | `\prod_{k=1}^{n} (x+k)` | $$\prod_{k=1}^{n} (x+k)$$ |
+
+### 2. Arytmetyka, Logika i Zbiory
+| Wejście skrótowe | Wyjście LaTeX | Przykładowy render |
+| :--- | :--- | :--- |
+| `p i (q lub nie r)` | `p \land (q \lor \neg r)` | $$p \land (q \lor \neg r)$$ |
+| `A sumaZ B nalezy do C` | `A \cup B \in C` | $$A \cup B \in C$$ |
+| `x nieNalezy do (A suma_zb B)` | `x \notin (A \cup B)` | $$x \notin (A \cup B)$$ |
+<!--| `(a+b) // (c+d)` | `\frac{a+b}{c+d}` | $$\frac{a+b}{c+d}$$ |-->
