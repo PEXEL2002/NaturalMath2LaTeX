@@ -5,75 +5,27 @@ import grammar.MathParserBaseVisitor;
 
 public class MainVisitor extends MathParserBaseVisitor<String> {
 
+    // Rejestracja specjalistów
+    private final BasicVisitor basic = new BasicVisitor(this);
+    private final AlgebraVisitor algebra = new AlgebraVisitor(this);
+    private final AnalysisVisitor analysis = new AnalysisVisitor(this);
+    private final MatrixVisitor matrix = new MatrixVisitor(this);
+
     @Override
     public String visitProgram(MathParser.ProgramContext ctx) {
-        // Główny punkt wejścia - odwiedzamy pierwsze wyrażenie w programie
         return visit(ctx.expression());
     }
 
-    @Override
-    public String visitAddSub(MathParser.AddSubContext ctx) {
-        String left = visit(ctx.left);
-        String right = visit(ctx.right);
-        String op = ctx.getChild(1).getText();
-        return left + " " + op + " " + right;
-    }
+    // Delegacja do BasicVisitor (podstawy: liczby, zmienne, grupy)
+    @Override public String visitConstant(MathParser.ConstantContext ctx) { return basic.visitConstant(ctx); }
+    @Override public String visitVariable(MathParser.VariableContext ctx) { return basic.visitVariable(ctx); }
+    @Override public String visitGrouping(MathParser.GroupingContext ctx) { return basic.visitGrouping(ctx); }
 
-    @Override
-    public String visitMultDiv(MathParser.MultDivContext ctx) {
-        String left = visit(ctx.left);
-        String right = visit(ctx.right);
-        String op = ctx.getChild(1).getText();
+    // Delegacja do AlgebraVisitor (działania, potęgi)
+    @Override public String visitAddSub(MathParser.AddSubContext ctx) { return algebra.visitAddSub(ctx); }
+    @Override public String visitMultDiv(MathParser.MultDivContext ctx) { return algebra.visitMultDiv(ctx); }
+    @Override public String visitImplicitMul(MathParser.ImplicitMulContext ctx) { return algebra.visitImplicitMul(ctx); }
+    @Override public String visitPower(MathParser.PowerContext ctx) { return algebra.visitPower(ctx); }
 
-        if (op.equals("//")) {
-            // Ułamki zawsze dostają klamry w LaTeX (\frac{licznik}{mianownik}),
-            // niezależnie od tego, czy użytkownik użył {} w kodzie źródłowym.
-            return "\\frac{" + left + "}{" + right + "}";
-        }
-
-        // Zamiana gwiazdki na profesjonalną kropkę mnożenia
-        String latexOp = op.equals("*") ? "\\cdot" : op;
-        return left + " " + latexOp + " " + right;
-    }
-
-    @Override
-    public String visitImplicitMul(MathParser.ImplicitMulContext ctx) {
-        // Obsługa mnożenia domyślnego (np. 2x, 2 x, a{b+c})
-        // Po prostu sklejamy wyniki spacją.
-        return visit(ctx.left) + " " + visit(ctx.right);
-    }
-
-    @Override
-    public String visitPower(MathParser.PowerContext ctx) {
-        // Potęgi zawsze wymagają klamer w wykładniku dla bezpieczeństwa w LaTeX
-        return visit(ctx.left) + "^{" + visit(ctx.right) + "}";
-    }
-
-    @Override
-    public String visitGrouping(MathParser.GroupingContext ctx) {
-        String content = visit(ctx.expression());
-        String fullText = ctx.getText();
-
-        if (fullText.startsWith("{")) {
-            // KLAMRY: Traktujemy je jako cichy separator/grupator.
-            // Zwracamy czysty środek. Dzięki temu {a+b}//c zadziała poprawnie
-            // i nie wyprodukuje podwójnych klamer w ułamku.
-            return content;
-        } else {
-            // NAWIASY: Przepisujemy je dosłownie do LaTeX-a.
-            return "(" + content + ")";
-        }
-    }
-
-    @Override
-    public String visitConstant(MathParser.ConstantContext ctx) {
-        // Pobieramy wartość liczbową (INT)
-        return ctx.INT().getText();
-    }
-
-    @Override
-    public String visitVariable(MathParser.VariableContext ctx) {
-        // Pobieramy nazwę zmiennej (ID)
-        return ctx.ID().getText();
-    }
+    // Tu w przyszłości dodasz metody dla Analysis (całki) i Matrix (macierze)
 }
