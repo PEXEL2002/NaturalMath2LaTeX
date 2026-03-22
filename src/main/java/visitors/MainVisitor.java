@@ -1,7 +1,8 @@
 package visitors;
 
-import grammar.MathParser;
-import grammar.MathParserBaseVisitor;
+import main.antlr4.grammar.MathLexer;
+import main.antlr4.grammar.MathParser;
+import main.antlr4.grammar.MathParserBaseVisitor;
 
 public class MainVisitor extends MathParserBaseVisitor<String> {
 
@@ -10,6 +11,8 @@ public class MainVisitor extends MathParserBaseVisitor<String> {
     private final AlgebraVisitor algebra = new AlgebraVisitor(this);
     private final AnalysisVisitor analysis = new AnalysisVisitor(this);
     private final MatrixVisitor matrix = new MatrixVisitor(this);
+
+    private final GreekVisitor greek = new GreekVisitor(this);
 
     @Override
     public String visitProgram(MathParser.ProgramContext ctx) {
@@ -28,4 +31,9 @@ public class MainVisitor extends MathParserBaseVisitor<String> {
     @Override public String visitPower(MathParser.PowerContext ctx) { return algebra.visitPower(ctx); }
 
     // Tu w przyszłości dodasz metody dla Analysis (całki) i Matrix (macierze)
+
+
+
+
+    @Override public String visitGreek(MathParser.GreekContext ctx) { return greek.visitGreek(ctx); }
 }

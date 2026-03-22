@@ -1,6 +1,6 @@
 package visitors;
 
-import grammar.MathParser;
+import main.antlr4.grammar.MathParser;
 
 public class AlgebraVisitor {
     private final MainVisitor main;

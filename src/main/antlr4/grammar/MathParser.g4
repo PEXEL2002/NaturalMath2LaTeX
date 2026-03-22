@@ -11,5 +11,6 @@ expression
     | left=expression (MUL | DIV_BLOCK | DIV_LINE) right=expression # MultDiv
     | left=expression (PLUS | MINUS) right=expression # AddSub
     | ID                                           # Variable
+    | GREEK                                        # Greek
     | INT                                          # Constant
     ;
