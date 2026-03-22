@@ -28,3 +28,11 @@
 | `A sumaZ B nalezy do C` | `A \cup B \in C` | $$A \cup B \in C$$ |
 | `x nieNalezy do (A suma_zb B)` | `x \notin (A \cup B)` | $$x \notin (A \cup B)$$ |
 <!--| `(a+b) // (c+d)` | `\frac{a+b}{c+d}` | $$\frac{a+b}{c+d}$$ |-->
+
+### 3. Alfabet grecki, Nieskończoność i Znaki
+| Wejście skrótowe | Wyjście LaTeX | Przykładowy render |
+| :--- | :--- | :--- |
+| `alfa + beta` | `\alpha + \beta` | $$\alpha + \beta$$ |
+| `-oo` | `-\infty` | $$-\infty$$ |
+| `Gamma // fi` | `\frac{\Gamma}{\phi}` | $$\frac{\Gamma}{\phi}$$ |
+| `-varepsilon + 5` | `-\varepsilon + 5` | $$-\varepsilon + 5$$ |
