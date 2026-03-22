@@ -13,6 +13,7 @@ GREEK
     | 'Upsilon' | 'Phi' | 'Fi' | 'Psi' | 'Omega'
     ;
 
+INFINITY : 'nieskonczonosc' | 'infty' | 'infinity' | 'oo' ;
 // Operatory - KOLEJNOŚĆ MA ZNACZENIE
 DIV_BLOCK : '//' ;  // To będzie nasz \frac{}{}
 DIV_LINE  : '/' ;   // To zostanie jako zwykły slash /

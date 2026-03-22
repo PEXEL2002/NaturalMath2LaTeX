@@ -1,6 +1,6 @@
 package visitors;
 
-import main.antlr4.grammar.MathParser;
+import antlr4.grammar.MathParser;
 
 public class BasicVisitor {
     private final MainVisitor main;
@@ -20,5 +20,8 @@ public class BasicVisitor {
     public String visitGrouping(MathParser.GroupingContext ctx) {
         String content = main.visit(ctx.expression());
         return ctx.getText().startsWith("{") ? content : "(" + content + ")";
+    }
+    public String visitInfinity(MathParser.InfinityContext ctx) {
+        return "\\infty";
     }
 }

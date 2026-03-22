@@ -1,8 +1,7 @@
 package visitors;
 
-import main.antlr4.grammar.MathLexer;
-import main.antlr4.grammar.MathParser;
-import main.antlr4.grammar.MathParserBaseVisitor;
+import antlr4.grammar.MathParser;
+import antlr4.grammar.MathParserBaseVisitor;
 
 public class MainVisitor extends MathParserBaseVisitor<String> {
 
@@ -29,6 +28,7 @@ public class MainVisitor extends MathParserBaseVisitor<String> {
     @Override public String visitMultDiv(MathParser.MultDivContext ctx) { return algebra.visitMultDiv(ctx); }
     @Override public String visitImplicitMul(MathParser.ImplicitMulContext ctx) { return algebra.visitImplicitMul(ctx); }
     @Override public String visitPower(MathParser.PowerContext ctx) { return algebra.visitPower(ctx); }
+    @Override public String visitUnarySign(MathParser.UnarySignContext ctx) {return algebra.visitUnarySign(ctx);}
 
     // Tu w przyszłości dodasz metody dla Analysis (całki) i Matrix (macierze)
 
@@ -36,4 +36,5 @@ public class MainVisitor extends MathParserBaseVisitor<String> {
 
 
     @Override public String visitGreek(MathParser.GreekContext ctx) { return greek.visitGreek(ctx); }
+    @Override public String visitInfinity(MathParser.InfinityContext ctx) { return basic.visitInfinity(ctx);}
 }

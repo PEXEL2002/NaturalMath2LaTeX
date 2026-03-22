@@ -1,4 +1,5 @@
-import main.antlr4.grammar.MathParser;
+import antlr4.grammar.MathLexer;
+import antlr4.grammar.MathParser;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
