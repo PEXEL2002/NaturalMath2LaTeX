@@ -10,10 +10,10 @@ public class MainVisitor extends MathParserBaseVisitor<String> {
     private final AlgebraVisitor algebra = new AlgebraVisitor(this);
     private final AnalysisVisitor analysis = new AnalysisVisitor(this);
     private final MatrixVisitor matrix = new MatrixVisitor(this);
-
     private final GreekVisitor greek = new GreekVisitor(this);
-
     private final TrigonometricVisitor tigonometric = new TrigonometricVisitor(this);
+
+    private final LogicVisitor logic = new LogicVisitor(this);
 
     @Override
     public String visitProgram(MathParser.ProgramContext ctx) {
@@ -43,7 +43,10 @@ public class MainVisitor extends MathParserBaseVisitor<String> {
     public String visitTrigonometric(MathParser.TrigonometricContext ctx) {
         return tigonometric.visitTrigonometric(ctx);
     }
-
     @Override
     public String visitDegree(MathParser.DegreeContext ctx) { return basic.visitDegree(ctx);}
+
+    @Override public String visitLogicNot(MathParser.LogicNotContext ctx) { return logic.visitLogicNot(ctx); }
+    @Override public String visitLogicAndOr(MathParser.LogicAndOrContext ctx) { return logic.visitLogicAndOr(ctx); }
+    @Override public String visitLogicImplIff(MathParser.LogicImplIffContext ctx) { return logic.visitLogicImplIff(ctx); }
 }

@@ -9,6 +9,12 @@ TO_NATURAL
 OVER_NATURAL
     : 'po' | 'over';
 
+LOGIC_AND     : 'i' | 'and' | 'oraz' | '&&' ;
+LOGIC_OR      : 'lub' | 'or' | 'albo' | '||' ;
+LOGIC_IMPLIES : '=>' | 'implikuje' | 'wynika' | 'zatem' ;
+LOGIC_IFF     : '<=>' | 'wtw' | 'wtedyitylkowtedy' | 'rownowaznie' ;
+LOGIC_NOT     : 'nie' | 'not' | '~' ;
+
 TRIGONOMETRIC
     : 'sin' | 'sinus'
     | 'cos' | 'cosinus'
