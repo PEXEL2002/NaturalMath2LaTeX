@@ -35,4 +35,10 @@ public class AlgebraVisitor {
     public String visitPower(MathParser.PowerContext ctx) {
         return main.visit(ctx.left) + "^{" + main.visit(ctx.right) + "}";
     }
+    public String visitUnarySign(MathParser.UnarySignContext ctx) {
+        String sign = ctx.getChild(0).getText();
+        String expr = main.visit(ctx.expression());
+        return sign + expr;
+    }
+
 }
