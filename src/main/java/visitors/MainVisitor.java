@@ -11,7 +11,7 @@ public class MainVisitor extends MathParserBaseVisitor<String> {
     private final AnalysisVisitor analysis = new AnalysisVisitor(this);
     private final MatrixVisitor matrix = new MatrixVisitor(this);
 
-    //private final GreekVisitor greek = new GreekVisitor(this);
+    private final GreekVisitor greek = new GreekVisitor(this);
 
     @Override
     public String visitProgram(MathParser.ProgramContext ctx) {
@@ -34,6 +34,6 @@ public class MainVisitor extends MathParserBaseVisitor<String> {
     @Override public String visitIntegral(MathParser.IntegralContext ctx) {return analysis.visitIntegral(ctx);}
 
 
-    //@Override public String visitGreek(MathParser.GreekContext ctx) { return greek.visitGreek(ctx); }
+    @Override public String visitGreek(MathParser.GreekContext ctx) { return greek.visitGreek(ctx); }
     @Override public String visitInfinity(MathParser.InfinityContext ctx) { return basic.visitInfinity(ctx);}
 }
