@@ -1,5 +1,14 @@
 lexer grammar MathLexer;
 
+INTEGRAL_MATH
+    : 'calka' | 'int' | 'integral';
+FROM_NATURAL
+    : 'od' | 'from';
+TO_NATURAL
+    : 'do' | 'to' ;
+OVER_NATURAL
+    : 'po' | 'over';
+
 GREEK
     // small
     : 'alfa' | 'alpha' | 'beta' | 'gamma' | 'delta' | 'epsilon' | 'varepsilon'
