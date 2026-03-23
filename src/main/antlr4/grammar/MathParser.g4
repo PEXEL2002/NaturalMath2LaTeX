@@ -13,6 +13,8 @@ expression
     | left=expression (MUL | DIV_BLOCK | DIV_LINE) right=expression # MultDiv
     | left=expression (PLUS | MINUS) right=expression               # AddSub
     | ID                                                            # Variable
+    | TRIGONOMETRIC '(' expression ')'                              # Trigonometric
+    | expression DEGREE                                             # Degree
     | GREEK                                                         # Greek
     | INFINITY                                                      # Infinity
     | INT                                                           # Constant

@@ -9,6 +9,39 @@ TO_NATURAL
 OVER_NATURAL
     : 'po' | 'over';
 
+TRIGONOMETRIC
+    : 'sin' | 'sinus'
+    | 'cos' | 'cosinus'
+    | 'tan' | 'tg' | 'tangens'
+    | 'cot' | 'ctg' | 'cotangens' | 'kotangens'
+    | 'sec' | 'secans' | 'sekans'
+    | 'csc' | 'cosecans' | 'kosekans'
+
+    | 'arcsin' | 'arcussinus'
+    | 'arccos' | 'arcuscosinus'
+    | 'arctan' | 'arctg' | 'arcustangens'
+    | 'arccot' | 'arcctg' | 'arcuscotangens' | 'arcuskotangens'
+    | 'arcsec' | 'arcussecans' | 'arcussekans'
+    | 'arccsc' | 'arcuscosecans' | 'arcuskosekans'
+
+    | 'sinh' | 'sinushiperboliczny'
+    | 'cosh' | 'cosinushiperboliczny'
+    | 'tanh' | 'tgh' | 'tangenshiperboliczny'
+    | 'coth' | 'ctgh' | 'cotangenshiperboliczny' | 'kotangenshiperboliczny'
+    | 'sech' | 'secanshiperboliczny'
+    | 'csch' | 'cosecanshiperboliczny'
+
+    | 'arcsinh' | 'arsinh' | 'areasinushiperboliczny'
+    | 'arccosh' | 'arcosh' | 'areacosinushiperboliczny'
+    | 'arctanh' | 'artanh' | 'areatangenshiperboliczny'
+    | 'arccoth' | 'arcoth' | 'areacotangenshiperboliczny'
+    | 'arcsech' | 'arsech' | 'areasecanshiperboliczny'
+    | 'arccsch' | 'arcsch' | 'areacosecanshiperboliczny'
+    ;
+
+DEGREE : 'deg' | 'stopni' | 'stopnie' | '°' ;
+
+
 GREEK
     // small
     : 'alfa' | 'alpha' | 'beta' | 'gamma' | 'delta' | 'epsilon' | 'varepsilon'
