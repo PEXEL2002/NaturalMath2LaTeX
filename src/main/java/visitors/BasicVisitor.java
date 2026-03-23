@@ -24,4 +24,10 @@ public class BasicVisitor {
     public String visitInfinity(MathParser.InfinityContext ctx) {
         return "\\infty";
     }
+
+    public String visitDegree(MathParser.DegreeContext ctx) {
+        String value = main.visit(ctx.expression());
+        return value + "^{\\circ}";
+    }
+
 }
