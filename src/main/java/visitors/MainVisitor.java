@@ -1,7 +1,7 @@
 package visitors;
 
-import antlr4.grammar.MathParser;
-import antlr4.grammar.MathParserBaseVisitor;
+import grammar.MathParser;
+import grammar.MathParserBaseVisitor;
 
 public class MainVisitor extends MathParserBaseVisitor<String> {
 
