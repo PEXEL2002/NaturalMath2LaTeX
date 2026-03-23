@@ -11,6 +11,8 @@ public class MainVisitor extends MathParserBaseVisitor<String> {
     private final AnalysisVisitor analysis = new AnalysisVisitor(this);
     private final MatrixVisitor matrix = new MatrixVisitor(this);
 
+    private final GreekVisitor greek = new GreekVisitor(this);
+
     @Override
     public String visitProgram(MathParser.ProgramContext ctx) {
         return visit(ctx.expression());
@@ -26,6 +28,13 @@ public class MainVisitor extends MathParserBaseVisitor<String> {
     @Override public String visitMultDiv(MathParser.MultDivContext ctx) { return algebra.visitMultDiv(ctx); }
     @Override public String visitImplicitMul(MathParser.ImplicitMulContext ctx) { return algebra.visitImplicitMul(ctx); }
     @Override public String visitPower(MathParser.PowerContext ctx) { return algebra.visitPower(ctx); }
+    @Override public String visitUnarySign(MathParser.UnarySignContext ctx) {return algebra.visitUnarySign(ctx);}
 
     // Tu w przyszłości dodasz metody dla Analysis (całki) i Matrix (macierze)
+
+
+
+
+    @Override public String visitGreek(MathParser.GreekContext ctx) { return greek.visitGreek(ctx); }
+    @Override public String visitInfinity(MathParser.InfinityContext ctx) { return basic.visitInfinity(ctx);}
 }

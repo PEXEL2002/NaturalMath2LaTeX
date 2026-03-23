@@ -21,4 +21,7 @@ public class BasicVisitor {
         String content = main.visit(ctx.expression());
         return ctx.getText().startsWith("{") ? content : "(" + content + ")";
     }
+    public String visitInfinity(MathParser.InfinityContext ctx) {
+        return "\\infty";
+    }
 }
