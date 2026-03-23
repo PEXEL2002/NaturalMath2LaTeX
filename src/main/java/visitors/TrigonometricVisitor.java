@@ -34,7 +34,6 @@ public class TrigonometricVisitor {
         trigonometricMap.put("cosecans", "\\csc");
         trigonometricMap.put("kosekans", "\\csc");
 
-        // --- CYKLOMETRYCZNE (ODWROTNE) ---
         trigonometricMap.put("arcsin", "\\arcsin");
         trigonometricMap.put("arcussinus", "\\arcsin");
 
@@ -107,12 +106,22 @@ public class TrigonometricVisitor {
 
     }
 
-    public String visitTrigonometric(MathParser.TrigonometricContext ctx) {
+    public String visitTrigonometricParen(MathParser.TrigonometricParenContext ctx) {
         String trigonometricName = ctx.TRIGONOMETRIC().getText();
 
         String latexTrigonometric = trigonometricMap.getOrDefault(trigonometricName, "\\" + trigonometricName);
 
         String argument = main.visit(ctx.expression());
+
+        return latexTrigonometric + "(" + argument + ")";
+    }
+
+    public String visitTrigonometricNoParen(MathParser.TrigonometricNoParenContext ctx) {
+        String trigonometricName = ctx.TRIGONOMETRIC().getText();
+        String latexTrigonometric = trigonometricMap.getOrDefault(trigonometricName, "\\" + trigonometricName);
+
+        String argument = main.visit(ctx.expression());
+
 
         return latexTrigonometric + "(" + argument + ")";
     }

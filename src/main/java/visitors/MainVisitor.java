@@ -11,7 +11,7 @@ public class MainVisitor extends MathParserBaseVisitor<String> {
     private final AnalysisVisitor analysis = new AnalysisVisitor(this);
     private final MatrixVisitor matrix = new MatrixVisitor(this);
     private final GreekVisitor greek = new GreekVisitor(this);
-    private final TrigonometricVisitor tigonometric = new TrigonometricVisitor(this);
+    private final TrigonometricVisitor trigonometric = new TrigonometricVisitor(this);
 
     private final LogicVisitor logic = new LogicVisitor(this);
 
@@ -40,9 +40,8 @@ public class MainVisitor extends MathParserBaseVisitor<String> {
     @Override public String visitInfinity(MathParser.InfinityContext ctx) { return basic.visitInfinity(ctx);}
 
     @Override
-    public String visitTrigonometric(MathParser.TrigonometricContext ctx) {
-        return tigonometric.visitTrigonometric(ctx);
-    }
+    public String visitTrigonometricParen(MathParser.TrigonometricParenContext ctx) {return trigonometric.visitTrigonometricParen(ctx);}
+    @Override public String visitTrigonometricNoParen(MathParser.TrigonometricNoParenContext ctx) {return trigonometric.visitTrigonometricNoParen(ctx);}
     @Override
     public String visitDegree(MathParser.DegreeContext ctx) { return basic.visitDegree(ctx);}
 
