@@ -15,6 +15,8 @@ public class MainVisitor extends MathParserBaseVisitor<String> {
 
     private final TrigonometricVisitor trigonometric = new TrigonometricVisitor(this);
 
+    private final LogicVisitor logic = new LogicVisitor(this);
+
     @Override
     public String visitProgram(MathParser.ProgramContext ctx) {
         return visit(ctx.expression());
@@ -51,4 +53,8 @@ public class MainVisitor extends MathParserBaseVisitor<String> {
 
     @Override
     public String visitDegree(MathParser.DegreeContext ctx) { return basic.visitDegree(ctx);}
+
+    @Override public String visitLogicNot(MathParser.LogicNotContext ctx) { return logic.visitLogicNot(ctx); }
+    @Override public String visitLogicAndOr(MathParser.LogicAndOrContext ctx) { return logic.visitLogicAndOr(ctx); }
+    @Override public String visitLogicImplIff(MathParser.LogicImplIffContext ctx) { return logic.visitLogicImplIff(ctx); }
 }
