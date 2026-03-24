@@ -13,6 +13,7 @@ expression
     | (PLUS | MINUS) expression                                     # UnarySign
     | TRIGONOMETRIC expression                                      # TrigonometricNoParen
     | left=expression HAT right=expression                          # Power
+    | left=expression UNDERSCORE right=expression                    # Underscore
     | left=expression right=expression                              # ImplicitMul
     | left=expression (MUL | DIV_BLOCK | DIV_LINE) right=expression # MultDiv
     | left=expression (PLUS | MINUS) right=expression               # AddSub
