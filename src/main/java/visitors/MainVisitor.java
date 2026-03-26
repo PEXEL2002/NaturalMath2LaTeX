@@ -63,4 +63,6 @@ public class MainVisitor extends MathParserBaseVisitor<String> {
 
     @Override public String visitSum(MathParser.SumContext ctx) {return notation.visitSum(ctx);}
     @Override public String visitProduct(MathParser.ProductContext ctx) {return notation.visitProduct(ctx);}
+
+    @Override public String visitLimit(MathParser.LimitContext ctx) { return analysis.visitLimit(ctx); }
 }
