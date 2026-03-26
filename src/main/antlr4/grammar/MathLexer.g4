@@ -62,22 +62,21 @@ GREEK
     ;
 
 INFINITY : 'nieskonczonosc' | 'infty' | 'infinity' | 'oo' | 'inf';
-// Operatory - KOLEJNOŚĆ MA ZNACZENIE
-DIV_BLOCK : '//' ;  // To będzie nasz \frac{}{}
-DIV_LINE  : '/' ;   // To zostanie jako zwykły slash /
+
+DIV_BLOCK : '//' ;
+DIV_LINE  : '/' ;
 
 PLUS      : '+' ;
 MINUS     : '-' ;
 MUL       : '*' ;
 HAT       : '^' ;
+UNDERSCORE: '_' ;
 L_BRACKET : '(' ;
 R_BRACKET : ')';
 
-// Grupowanie
 L_CURLY   : '{' ;
 R_CURLY   : '}' ;
 
-// Dane
 ID        : [a-zA-Z]+ ;
 INT       : [0-9]+ ;
 WS        : [ \t\r\n]+ -> skip ;

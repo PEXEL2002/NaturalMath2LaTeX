@@ -32,6 +32,7 @@ public class MainVisitor extends MathParserBaseVisitor<String> {
     @Override public String visitMultDiv(MathParser.MultDivContext ctx) { return algebra.visitMultDiv(ctx); }
     @Override public String visitImplicitMul(MathParser.ImplicitMulContext ctx) { return algebra.visitImplicitMul(ctx); }
     @Override public String visitPower(MathParser.PowerContext ctx) { return algebra.visitPower(ctx); }
+    @Override public String visitUnderscore(MathParser.UnderscoreContext ctx) { return algebra.visitUnderscore(ctx); }
     @Override public String visitUnarySign(MathParser.UnarySignContext ctx) {return algebra.visitUnarySign(ctx);}
 
     // Tu w przyszłości dodasz metody dla Analysis (całki) i Matrix (macierze)
