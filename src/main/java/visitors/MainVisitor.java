@@ -17,6 +17,8 @@ public class MainVisitor extends MathParserBaseVisitor<String> {
 
     private final LogicVisitor logic = new LogicVisitor(this);
 
+    private final NotationVisitor notation = new NotationVisitor(this);
+
     @Override
     public String visitProgram(MathParser.ProgramContext ctx) {
         return visit(ctx.expression());
@@ -58,4 +60,7 @@ public class MainVisitor extends MathParserBaseVisitor<String> {
     @Override public String visitLogicNot(MathParser.LogicNotContext ctx) { return logic.visitLogicNot(ctx); }
     @Override public String visitLogicAndOr(MathParser.LogicAndOrContext ctx) { return logic.visitLogicAndOr(ctx); }
     @Override public String visitLogicImplIff(MathParser.LogicImplIffContext ctx) { return logic.visitLogicImplIff(ctx); }
+
+    @Override public String visitSum(MathParser.SumContext ctx) {return notation.visitSum(ctx);}
+    @Override public String visitProduct(MathParser.ProductContext ctx) {return notation.visitProduct(ctx);}
 }

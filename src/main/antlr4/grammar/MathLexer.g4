@@ -2,6 +2,14 @@ lexer grammar MathLexer;
 
 INTEGRAL_MATH
     : 'calka' | 'int' | 'integral';
+
+SUM_MATH
+    : 'suma' | 'sum' ;
+PROD_MATH
+    : 'iloczyn' | 'prod' | 'product' ;
+EQ
+    : '=' | 'rowne' ;
+
 FROM_NATURAL
     : 'od' | 'from';
 TO_NATURAL
@@ -9,7 +17,7 @@ TO_NATURAL
 OVER_NATURAL
     : 'po' | 'over';
 
-LOGIC_AND     : 'i' | 'and' | 'oraz' | '&&' ;
+LOGIC_AND     : 'and' | 'oraz' | '&&' ;
 LOGIC_OR      : 'lub' | 'or' | 'albo' | '||' ;
 LOGIC_IMPLIES : '=>' | 'implikuje' | 'wynika' | 'zatem' ;
 LOGIC_IFF     : '<=>' | 'wtw' | 'wtedyitylkowtedy' | 'rownowaznie' ;
