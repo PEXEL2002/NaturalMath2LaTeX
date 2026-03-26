@@ -7,6 +7,13 @@ SUM_MATH
     : 'suma' | 'sum' ;
 PROD_MATH
     : 'iloczyn' | 'prod' | 'product' ;
+
+LIMIT_MATH
+    : 'granica' | 'lim' | 'limes' ;
+WHEN
+    : 'przy' | 'gdy' | 'dla' ;
+APPROACHES
+    : 'dazy' | 'dazacym' | 'zmierza' | '->' ;
 EQ
     : '=' | 'rowne' ;
 
