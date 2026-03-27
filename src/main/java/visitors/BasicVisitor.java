@@ -29,5 +29,23 @@ public class BasicVisitor {
         String value = main.visit(ctx.expression());
         return value + "^{\\circ}";
     }
-
+    public String visitComparison(MathParser.ComparisonContext ctx) {
+        String left = main.visit(ctx.left);
+        String right = main.visit(ctx.right);
+        String op = ctx.getChildCount() > 1 ? ctx.getChild(1).getText() : "";
+        return switch (op) {
+            case "<=" -> left + " \\le " + right;
+            case ">=" -> left + " \\ge " + right;
+            case "!=", "<>" -> left + " \\neq " + right;
+            default -> left + " " + op + " " + right; // dla < i >
+        };
+    }
+    public String visitEquality(MathParser.EqualityContext ctx) {
+        String left = main.visit(ctx.left);
+        if (ctx.right != null) {
+            return left + " = " + main.visit(ctx.right);
+        } else {
+            return left + " = ";
+        }
+    }
 }

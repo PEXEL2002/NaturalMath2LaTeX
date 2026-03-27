@@ -9,7 +9,8 @@ expression
     | SUM_MATH FROM_NATURAL? var=ID EQ lower=expression TO_NATURAL? upper=expression L_BRACKET body=expression R_BRACKET  # Sum
     | PROD_MATH FROM_NATURAL? var=ID EQ lower=expression TO_NATURAL? upper=expression L_BRACKET body=expression R_BRACKET # Product
     | LIMIT_MATH WHEN? var=ID APPROACHES TO_NATURAL? target=expression L_BRACKET body=expression R_BRACKET # Limit
-    | EQ expression # Equality
+    | left=expression EQ right=expression? #Equality
+    | left=expression (LT|LEQ|GT|GEQ|NEQ) right=expression    #Comparison
     | (L_CURLY | L_BRACKET) expression (R_CURLY |  R_BRACKET)       # Grouping
     | TRIGONOMETRIC '(' expression ')'                              # TrigonometricParen
     | expression DEGREE                                             # Degree

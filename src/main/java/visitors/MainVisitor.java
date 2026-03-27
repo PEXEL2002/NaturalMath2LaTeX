@@ -28,6 +28,8 @@ public class MainVisitor extends MathParserBaseVisitor<String> {
     @Override public String visitConstant(MathParser.ConstantContext ctx) { return basic.visitConstant(ctx); }
     @Override public String visitVariable(MathParser.VariableContext ctx) { return basic.visitVariable(ctx); }
     @Override public String visitGrouping(MathParser.GroupingContext ctx) { return basic.visitGrouping(ctx); }
+    @Override public String visitEquality(MathParser.EqualityContext ctx) { return basic.visitEquality(ctx); }
+    @Override public String visitComparison(MathParser.ComparisonContext ctx) { return basic.visitComparison(ctx); }
 
     // Delegacja do AlgebraVisitor (działania, potęgi)
     @Override public String visitAddSub(MathParser.AddSubContext ctx) { return algebra.visitAddSub(ctx); }

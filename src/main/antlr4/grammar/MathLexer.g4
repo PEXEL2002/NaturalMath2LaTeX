@@ -14,8 +14,6 @@ WHEN
     : 'przy' | 'gdy' | 'dla' ;
 APPROACHES
     : 'dazy' | 'dazacym' | 'zmierza' | '->' ;
-EQ
-    : '=' | 'rowne' ;
 
 FROM_NATURAL
     : 'od' | 'from';
@@ -30,6 +28,12 @@ LOGIC_IMPLIES : '=>' | 'implikuje' | 'wynika' | 'zatem' ;
 LOGIC_IFF     : '<=>' | 'wtw' | 'wtedyitylkowtedy' | 'rownowaznie' ;
 LOGIC_NOT     : 'nie' | 'not' | '~' ;
 
+LEQ   : '<=' | '≤' ;
+GEQ   : '>=' | '≥' ;
+NEQ   : '!=' | '<>' | '≠' ;
+LT    : '<' ;
+GT    : '>' ;
+EQ    : '='| '==' | 'rowne' ;
 TRIGONOMETRIC
     : 'sin' | 'sinus'
     | 'cos' | 'cosinus'
