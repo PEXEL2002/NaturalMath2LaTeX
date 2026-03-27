@@ -10,12 +10,14 @@ public class BasicVisitor {
     }
 
     public String visitConstant(MathParser.ConstantContext ctx) {
-        return ctx.INT().getText();
+        // Normalize decimal separator so LaTeX always uses a dot.
+        return ctx.NUMBER().getText().replace(',', '.');
     }
 
     public String visitVariable(MathParser.VariableContext ctx) {
         return ctx.ID().getText();
     }
+
 
     public String visitGrouping(MathParser.GroupingContext ctx) {
         String content = main.visit(ctx.expression());

@@ -17,7 +17,7 @@ expression
     | LOGIC_NOT expression                                          # LogicNot
     | (PLUS | MINUS) expression                                     # UnarySign
     | TRIGONOMETRIC expression                                      # TrigonometricNoParen
-    | left=expression UNDERSCORE right=expression                    # Underscore
+    | left=expression UNDERSCORE right=expression                   # Underscore
     | left=expression HAT right=expression                          # Power
     | left=expression right=expression                              # ImplicitMul
     | left=expression (MUL | DIV_BLOCK | DIV_LINE) right=expression # MultDiv
@@ -27,5 +27,5 @@ expression
     | ID                                                            # Variable
     | GREEK                                                         # Greek
     | INFINITY                                                      # Infinity
-    | INT                                                           # Constant
+    | NUMBER                                                        # Constant
     ;

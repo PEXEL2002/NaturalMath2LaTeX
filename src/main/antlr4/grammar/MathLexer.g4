@@ -97,5 +97,5 @@ L_CURLY   : '{' ;
 R_CURLY   : '}' ;
 
 ID        : [a-zA-Z]+ ;
-INT       : [0-9]+ ;
+NUMBER    : [0-9]+ ( ('.'|',') [0-9]+ )?;
 WS        : [ \t\r\n]+ -> skip ;
