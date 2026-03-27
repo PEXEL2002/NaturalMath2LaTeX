@@ -26,6 +26,7 @@ public class MainVisitor extends MathParserBaseVisitor<String> {
 
     // Delegacja do BasicVisitor (podstawy: liczby, zmienne, grupy)
     @Override public String visitConstant(MathParser.ConstantContext ctx) { return basic.visitConstant(ctx); }
+    @Override public String visitFunctionCall(MathParser.FunctionCallContext ctx) { return basic.visitFunctionCall(ctx); }
     @Override public String visitVariable(MathParser.VariableContext ctx) { return basic.visitVariable(ctx); }
     @Override public String visitGrouping(MathParser.GroupingContext ctx) { return basic.visitGrouping(ctx); }
     @Override public String visitEquality(MathParser.EqualityContext ctx) { return basic.visitEquality(ctx); }

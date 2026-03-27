@@ -12,20 +12,24 @@ expression
     | left=expression EQ right=expression? #Equality
     | left=expression (LT|LEQ|GT|GEQ|NEQ) right=expression    #Comparison
     | (L_CURLY | L_BRACKET) expression (R_CURLY |  R_BRACKET)       # Grouping
-    | TRIGONOMETRIC '(' expression ')'                              # TrigonometricParen
+    | TRIGONOMETRIC L_BRACKET expression R_BRACKET                 # TrigonometricParen
     | expression DEGREE                                             # Degree
     | LOGIC_NOT expression                                          # LogicNot
     | (PLUS | MINUS) expression                                     # UnarySign
     | TRIGONOMETRIC expression                                      # TrigonometricNoParen
     | left=expression UNDERSCORE right=expression                   # Underscore
     | left=expression HAT right=expression                          # Power
+    | left=expression (DIV_BLOCK | DIV_LINE) right=expression # MultDiv
+    | left=expression MUL right=expression # MultDiv
     | left=expression right=expression                              # ImplicitMul
-    | left=expression (MUL | DIV_BLOCK | DIV_LINE) right=expression # MultDiv
     | left=expression (PLUS | MINUS) right=expression               # AddSub
     | left=expression (LOGIC_AND | LOGIC_OR) right=expression       # LogicAndOr
     | left=expression (LOGIC_IMPLIES | LOGIC_IFF) right=expression  # LogicImplIff
+    | ID L_BRACKET argumentList R_BRACKET                          # FunctionCall
     | ID                                                            # Variable
     | GREEK                                                         # Greek
     | INFINITY                                                      # Infinity
     | NUMBER                                                        # Constant
     ;
+
+argumentList : expression (COMMA expression)* ;

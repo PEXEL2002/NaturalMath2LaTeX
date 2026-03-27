@@ -99,3 +99,4 @@ R_CURLY   : '}' ;
 ID        : [a-zA-Z]+ ;
 NUMBER    : [0-9]+ ( ('.'|',') [0-9]+ )?;
 WS        : [ \t\r\n]+ -> skip ;
+COMMA : ',' ;

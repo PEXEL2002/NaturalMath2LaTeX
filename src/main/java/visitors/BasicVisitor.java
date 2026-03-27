@@ -2,6 +2,9 @@ package visitors;
 
 import grammar.MathParser;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class BasicVisitor {
     private final MainVisitor main;
 
@@ -10,7 +13,6 @@ public class BasicVisitor {
     }
 
     public String visitConstant(MathParser.ConstantContext ctx) {
-        // Normalize decimal separator so LaTeX always uses a dot.
         return ctx.NUMBER().getText().replace(',', '.');
     }
 
@@ -39,7 +41,7 @@ public class BasicVisitor {
             case "<=" -> left + " \\le " + right;
             case ">=" -> left + " \\ge " + right;
             case "!=", "<>" -> left + " \\neq " + right;
-            default -> left + " " + op + " " + right; // dla < i >
+            default -> left + " " + op + " " + right;
         };
     }
     public String visitEquality(MathParser.EqualityContext ctx) {
@@ -49,5 +51,15 @@ public class BasicVisitor {
         } else {
             return left + " = ";
         }
+    }
+    public String visitFunctionCall(MathParser.FunctionCallContext ctx) {
+        String functionName = ctx.ID().getText();
+        List<String> args = new ArrayList<>();
+        for (MathParser.ExpressionContext exprCtx : ctx.argumentList().expression()) {
+            args.add(main.visit(exprCtx));
+        }
+        String joinedArgs = String.join(", ", args);
+
+        return functionName + "(" + joinedArgs + ")";
     }
 }
