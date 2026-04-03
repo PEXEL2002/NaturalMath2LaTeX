@@ -22,6 +22,11 @@
             String variable = ctx.var.getText();
             String target = main.visit(ctx.target);
             String body = main.visit(ctx.body);
-            return "\\lim_{" + variable + " \\to " + target + "} \\left(" + body + "\\right)";
+            if (ctx.L_BRACKET() != null) {
+                return "\\lim_{" + variable + " \\to " + target + "} \\left(" + body + "\\right)";
+            } else {
+                return "\\lim_{" + variable + " \\to " + target + "} " + body;
+            }
         }
+
     }
