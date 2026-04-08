@@ -10,8 +10,10 @@ PROD_MATH
 
 LIMIT_MATH
     : 'granica' | 'lim' | 'limes' ;
+FOR_DLA
+    : 'for' | 'dla' ;
 WHEN
-    : 'przy' | 'gdy' | 'dla' ;
+    : 'przy' | 'gdy' ;
 APPROACHES
     : 'dazy' | 'dazacym' | 'zmierza' | '->' ;
 
@@ -100,3 +102,5 @@ ID        : [a-zA-Z]+ ;
 NUMBER    : [0-9]+ ( ('.'|',') [0-9]+ )?;
 WS        : [ \t\r\n]+ -> skip ;
 COMMA : ',' ;
+COLON : ':' ;
+SEMICOLON : ';' ;
