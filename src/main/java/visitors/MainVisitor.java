@@ -69,4 +69,8 @@ public class MainVisitor extends MathParserBaseVisitor<String> {
     @Override public String visitEqualityPiecewise(MathParser.EqualityPiecewiseContext ctx) { return notation.visitEqualityPiecewise(ctx); }
 
     @Override public String visitLimit(MathParser.LimitContext ctx) { return analysis.visitLimit(ctx); }
+
+    @Override public String visitFunctionPowerParen(MathParser.FunctionPowerParenContext ctx) { return trigonometric.visitFunctionPowerParen(ctx); }
+
+    @Override public String visitFunctionPowerNoParen(MathParser.FunctionPowerNoParenContext ctx) { return trigonometric.visitFunctionPowerNoParen(ctx); }
 }

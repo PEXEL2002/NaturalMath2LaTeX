@@ -20,8 +20,33 @@
 
         public String visitLimit(MathParser.LimitContext ctx) {
             String variable = ctx.var.getText();
-            String target = main.visit(ctx.target);
+            String target = renderLimitTarget(ctx.target);
             String body = main.visit(ctx.body);
-            return "\\lim_{" + variable + " \\to " + target + "} \\left(" + body + "\\right)";
+            if (ctx.L_BRACKET() != null) {
+                return "\\lim_{" + variable + " \\to " + target + "} \\left(" + body + "\\right)";
+            } else {
+                return "\\lim_{" + variable + " \\to " + target + "} " + body;
+            }
         }
+
+        private String renderLimitTarget(MathParser.LimitTargetContext ctx) {
+            if (ctx.NUMBER() != null) {
+                String n = ctx.NUMBER().getText().replace(',', '.');
+                return (ctx.MINUS() != null ? "-" : "") + n;
+            }
+            if (ctx.INFINITY() != null) {
+                return (ctx.MINUS() != null ? "-" : "") + "\\infty";
+            }
+            if (ctx.ID() != null) {
+                return ctx.ID().getText();
+            }
+            if (ctx.GREEK() != null) {
+                return ctx.GREEK().getText();
+            }
+            if (ctx.expression() != null) {
+                return main.visit(ctx.expression());
+            }
+            return ctx.getText();
+        }
+
     }

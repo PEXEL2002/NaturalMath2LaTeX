@@ -108,9 +108,7 @@ public class TrigonometricVisitor {
 
     public String visitTrigonometricParen(MathParser.TrigonometricParenContext ctx) {
         String trigonometricName = ctx.TRIGONOMETRIC().getText();
-
         String latexTrigonometric = trigonometricMap.getOrDefault(trigonometricName, "\\" + trigonometricName);
-
         String argument = main.visit(ctx.expression());
 
         return latexTrigonometric + "(" + argument + ")";
@@ -119,13 +117,28 @@ public class TrigonometricVisitor {
     public String visitTrigonometricNoParen(MathParser.TrigonometricNoParenContext ctx) {
         String trigonometricName = ctx.TRIGONOMETRIC().getText();
         String latexTrigonometric = trigonometricMap.getOrDefault(trigonometricName, "\\" + trigonometricName);
-
         String argument = main.visit(ctx.expression());
-
 
         return latexTrigonometric + "(" + argument + ")";
     }
 
+    public String visitFunctionPowerParen(MathParser.FunctionPowerParenContext ctx) {
+        String funcName = ctx.TRIGONOMETRIC().getText();
+        String latexFunc = trigonometricMap.getOrDefault(funcName, "\\" + funcName);
 
+        String power = main.visit(ctx.power);
+        String argument = main.visit(ctx.arg);
 
+        return latexFunc + "^{" + power + "}(" + argument + ")";
+    }
+
+    public String visitFunctionPowerNoParen(MathParser.FunctionPowerNoParenContext ctx) {
+        String funcName = ctx.TRIGONOMETRIC().getText();
+        String latexFunc = trigonometricMap.getOrDefault(funcName, "\\" + funcName);
+
+        String power = main.visit(ctx.power);
+        String argument = main.visit(ctx.arg);
+
+        return latexFunc + "^{" + power + "}(" + argument + ")";
+    }
 }
