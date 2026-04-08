@@ -8,7 +8,8 @@ expression
     : INTEGRAL_MATH (FROM_NATURAL lower=expression TO_NATURAL upper=expression)? body=expression (OVER_NATURAL var=ID)? # Integral
     | SUM_MATH FROM_NATURAL? var=ID EQ lower=expression TO_NATURAL? upper=expression L_BRACKET body=expression R_BRACKET  # Sum
     | PROD_MATH FROM_NATURAL? var=ID EQ lower=expression TO_NATURAL? upper=expression L_BRACKET body=expression R_BRACKET # Product
-    | LIMIT_MATH WHEN? var=ID APPROACHES TO_NATURAL? target=limitTarget L_BRACKET? body=expression R_BRACKET? # Limit
+    | LIMIT_MATH (WHEN | FOR_DLA)? var=ID APPROACHES TO_NATURAL? target=expression L_BRACKET body=expression R_BRACKET # Limit
+    | left=expression EQ right=piecewiseExpr                        # EqualityPiecewise
     | left=expression EQ right=expression? #Equality
     | left=expression (LT|LEQ|GT|GEQ|NEQ) right=expression    #Comparison
     | (L_CURLY | L_BRACKET) expression (R_CURLY |  R_BRACKET)       # Grouping
@@ -41,5 +42,8 @@ limitTarget
     | GREEK
     | L_BRACKET expression R_BRACKET
     ;
-
 argumentList : expression (COMMA expression)* ;
+
+piecewiseExpr : piecewiseCase (SEMICOLON piecewiseCase)+ ;
+
+piecewiseCase : value=expression sep=(COLON | FOR_DLA) condition=expression ;
