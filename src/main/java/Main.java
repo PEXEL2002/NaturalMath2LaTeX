@@ -55,6 +55,14 @@ public class Main {
         Javalin app = Javalin.create(config -> config.showJavalinBanner = false)
                 .start(port);
 
+        app.before(ctx -> {
+            ctx.header("Access-Control-Allow-Origin", "*");
+            ctx.header("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
+            ctx.header("Access-Control-Allow-Headers", "Content-Type");
+        });
+
+        app.options("/api/convert", ctx -> ctx.status(204));
+
         app.post("/api/convert", ctx -> {
             ConvertRequest request;
             try {
