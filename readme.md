@@ -36,3 +36,49 @@
 | `-oo` | `-\infty` | $$-\infty$$ |
 | `Gamma // fi` | `\frac{\Gamma}{\phi}` | $$\frac{\Gamma}{\phi}$$ |
 | `-varepsilon + 5` | `-\varepsilon + 5` | $$-\varepsilon + 5$$ |
+
+## Tryby uruchamiania z `.env`
+
+Aplikacja czyta konfigurację z pliku `.env` i uruchamia się w jednym z dwóch trybów:
+
+- `MODE=CONSOLE` - tryb terminalowy (domyślny)
+- `MODE=API` - uruchamia serwer HTTP (Javalin)
+- `PORT=7070` - port dla API (opcjonalny)
+
+Przykładowy `.env`:
+
+```env
+MODE=API
+PORT=7070
+```
+
+Uruchomienie:
+
+```bash
+mvn compile
+mvn exec:java
+```
+
+## API
+
+Endpoint:
+
+- `POST /api/convert`
+
+Przykładowe wywołanie:
+
+```bash
+curl -X POST http://localhost:7070/api/convert \
+  -H "Content-Type: application/json" \
+  -d '{"expression":"f(x) = x dla x >=0; -x dla x <0"}'
+```
+
+Przykładowa odpowiedź:
+
+```json
+{
+  "expression": "f(x) = x dla x >=0; -x dla x <0",
+  "latex": "...wynik wygenerowany przez parser..."
+}
+```
+
