@@ -84,6 +84,11 @@ GREEK
 
 INFINITY : 'nieskonczonosc' | 'infty' | 'infinity' | 'oo' | 'inf';
 
+// Macierze
+MATRIX_START : 'macierz' | 'matrix' | 'mat' ;
+AUGMENTED_MATRIX : 'macierzRozszerzona' | 'augmented' | 'augmentedMatrix' ;
+DOTS : 'cdots' | 'kropkiPoziome' | 'vdots' | 'kropkiPionowe' | 'ddots' | 'kropkiUkosne' ;
+
 DIV_BLOCK : '//' ;
 DIV_LINE  : '/' ;
 

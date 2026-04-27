@@ -73,4 +73,8 @@ public class MainVisitor extends MathParserBaseVisitor<String> {
     @Override public String visitFunctionPowerParen(MathParser.FunctionPowerParenContext ctx) { return trigonometric.visitFunctionPowerParen(ctx); }
 
     @Override public String visitFunctionPowerNoParen(MathParser.FunctionPowerNoParenContext ctx) { return trigonometric.visitFunctionPowerNoParen(ctx); }
+
+    @Override public String visitMatrix(MathParser.MatrixContext ctx) { return matrix.visitMatrix(ctx); }
+    @Override public String visitAugmentedMatrix(MathParser.AugmentedMatrixContext ctx) { return matrix.visitAugmentedMatrix(ctx); }
+    @Override public String visitDots(MathParser.DotsContext ctx) { return matrix.visitDots(ctx); }
 }

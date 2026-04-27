@@ -9,6 +9,8 @@ expression
     | SUM_MATH FROM_NATURAL? var=ID EQ lower=expression TO_NATURAL? upper=expression L_BRACKET body=expression R_BRACKET  # Sum
     | PROD_MATH FROM_NATURAL? var=ID EQ lower=expression TO_NATURAL? upper=expression L_BRACKET body=expression R_BRACKET # Product
     | LIMIT_MATH (WHEN | FOR_DLA)? var=ID APPROACHES TO_NATURAL? target=limitTarget L_BRACKET body=expression R_BRACKET # Limit
+    | MATRIX_START L_BRACKET matrixRows R_BRACKET                   # Matrix
+    | AUGMENTED_MATRIX L_BRACKET leftPart=matrixRows SEMICOLON rightPart=matrixRows R_BRACKET # AugmentedMatrix
     | left=expression EQ right=piecewiseExpr                        # EqualityPiecewise
     | left=expression EQ right=expression? #Equality
     | left=expression (LT|LEQ|GT|GEQ|NEQ) right=expression    #Comparison
@@ -29,6 +31,7 @@ expression
     | left=expression (LOGIC_AND | LOGIC_OR) right=expression       # LogicAndOr
     | left=expression (LOGIC_IMPLIES | LOGIC_IFF) right=expression  # LogicImplIff
     | ID L_BRACKET argumentList R_BRACKET                          # FunctionCall
+    | DOTS                                                          # Dots
     | ID                                                            # Variable
     | GREEK                                                         # Greek
     | INFINITY                                                      # Infinity
@@ -47,3 +50,9 @@ argumentList : expression (COMMA expression)* ;
 piecewiseExpr : piecewiseCase (SEMICOLON piecewiseCase)+ ;
 
 piecewiseCase : value=expression sep=(COLON | FOR_DLA) condition=expression ;
+
+matrixRows : matrixRow (SEMICOLON matrixRow)* ;
+
+matrixRow : matrixElement (COMMA matrixElement)* ;
+
+matrixElement : expression ;

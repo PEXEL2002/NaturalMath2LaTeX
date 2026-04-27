@@ -37,6 +37,15 @@
 | `Gamma // fi` | `\frac{\Gamma}{\phi}` | $$\frac{\Gamma}{\phi}$$ |
 | `-varepsilon + 5` | `-\varepsilon + 5` | $$-\varepsilon + 5$$ |
 
+### 4. Macierze
+| Wejście skrótowe                                       | Wyjście LaTeX | Przykładowy render                                                                                         |
+|:-------------------------------------------------------| :--- |:-----------------------------------------------------------------------------------------------------------|
+| `macierz(1,2; 3,4)`                                    | `\begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix}` | $$\begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix}$$                                                           |
+| `matrix(a,b,c; d,e,f; g,h,i)`                          | `\begin{pmatrix} a & b & c \\ d & e & f \\ g & h & i \end{pmatrix}` | $$\begin{pmatrix} a & b & c \\ d & e & f \\ g & h & i \end{pmatrix}$$                                      |
+| `macierzRozszerzona(1,2; 3,4; 5,6)`                    | `\left(\begin{matrix} 1 & 2 \\ 3 & 4 \end{matrix}\right\|\left.\begin{matrix} 5 \\ 6 \end{matrix}\right)` | $$\left(\begin{matrix} 1 & 2 \\ 3 & 4 \end{matrix}\right&#124; \left.\begin{matrix} 5 \\ 6 \end{matrix}\right)$$ |
+| `matrix(1,cdots,n; vdots,ddots,vdots; a,cdots,z)`      | `\begin{pmatrix} 1 & \cdots & n \\ \vdots & \ddots & \vdots \\ a & \cdots & z \end{pmatrix}` | $$\begin{pmatrix} 1 & \cdots & n \\ \vdots & \ddots & \vdots \\ a & \cdots & z \end{pmatrix}$$             |
+| `macierz(1,kropkiPoziome; kropkiPionowe,kropkiUkosne)` | `\begin{pmatrix} 1 & \cdots \\ \vdots & \ddots \end{pmatrix}` | $$\begin{pmatrix} 1 & \cdots \\ \vdots & \ddots \end{pmatrix}$$                                            |
+
 ## Tryby uruchamiania z `.env`
 
 Aplikacja czyta konfigurację z pliku `.env` i uruchamia się w jednym z dwóch trybów:
