@@ -14,6 +14,9 @@ import java.util.Scanner;
 
 public class Main {
     private static final int DEFAULT_API_PORT = 7070;
+    private static final String[] MATRIX_KEYWORDS = {
+            "macierzRozszerzona", "augmentedMatrix", "augmented", "macierz", "matrix", "mat"
+    };
 
     public static void main(String[] args) {
         AppConfig config = AppConfig.fromEnv();
@@ -92,7 +95,9 @@ public class Main {
     }
 
     private static String convertToLatex(String input) {
-        MathLexer lexer = new MathLexer(CharStreams.fromString(input));
+        String normalizedInput = normalizeMatrixNotation(input);
+
+        MathLexer lexer = new MathLexer(CharStreams.fromString(normalizedInput));
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         MathParser parser = new MathParser(tokens);
 
@@ -109,6 +114,145 @@ public class Main {
 
         MainVisitor visitor = new MainVisitor();
         return visitor.visit(tree);
+    }
+
+    private static String normalizeMatrixNotation(String input) {
+        StringBuilder output = new StringBuilder();
+        int i = 0;
+
+        while (i < input.length()) {
+            String keyword = matchedMatrixKeyword(input, i);
+            if (keyword == null) {
+                output.append(input.charAt(i));
+                i++;
+                continue;
+            }
+
+            int j = i + keyword.length();
+            while (j < input.length() && Character.isWhitespace(input.charAt(j))) {
+                j++;
+            }
+
+            if (j >= input.length() || input.charAt(j) != '(') {
+                output.append(input.charAt(i));
+                i++;
+                continue;
+            }
+
+            int close = findClosingParen(input, j);
+            if (close < 0) {
+                output.append(input.substring(i));
+                break;
+            }
+
+            output.append(input, i, j + 1);
+            String inner = input.substring(j + 1, close);
+            output.append(normalizeMatrixContent(inner));
+            output.append(')');
+            i = close + 1;
+        }
+
+        return output.toString();
+    }
+
+    private static String matchedMatrixKeyword(String input, int index) {
+        for (String keyword : MATRIX_KEYWORDS) {
+            if (!input.startsWith(keyword, index)) {
+                continue;
+            }
+
+            boolean beforeOk = index == 0 || !Character.isLetterOrDigit(input.charAt(index - 1));
+            int end = index + keyword.length();
+            boolean afterOk = end >= input.length() || !Character.isLetterOrDigit(input.charAt(end));
+            if (beforeOk && afterOk) {
+                return keyword;
+            }
+        }
+        return null;
+    }
+
+    private static int findClosingParen(String input, int openIndex) {
+        int depth = 0;
+        for (int i = openIndex; i < input.length(); i++) {
+            char c = input.charAt(i);
+            if (c == '(') {
+                depth++;
+            } else if (c == ')') {
+                depth--;
+                if (depth == 0) {
+                    return i;
+                }
+            }
+        }
+        return -1;
+    }
+
+    private static String normalizeMatrixContent(String content) {
+        StringBuilder out = new StringBuilder();
+        int depth = 0;
+        int i = 0;
+
+        while (i < content.length()) {
+            char c = content.charAt(i);
+
+            if (Character.isWhitespace(c)) {
+                int wsStart = i;
+                while (i < content.length() && Character.isWhitespace(content.charAt(i))) {
+                    i++;
+                }
+
+                char prev = previousNonWhitespace(content, wsStart - 1);
+                char next = nextNonWhitespace(content, i);
+
+                if (depth == 0 && isElementSeparator(prev, next)) {
+                    out.append(", ");
+                } else {
+                    out.append(' ');
+                }
+                continue;
+            }
+
+            if (c == '(' || c == '{' || c == '[') {
+                depth++;
+            } else if ((c == ')' || c == '}' || c == ']') && depth > 0) {
+                depth--;
+            }
+
+            out.append(c);
+            i++;
+        }
+
+        return out.toString();
+    }
+
+    private static char previousNonWhitespace(String text, int start) {
+        for (int i = start; i >= 0; i--) {
+            if (!Character.isWhitespace(text.charAt(i))) {
+                return text.charAt(i);
+            }
+        }
+        return '\0';
+    }
+
+    private static char nextNonWhitespace(String text, int start) {
+        for (int i = start; i < text.length(); i++) {
+            if (!Character.isWhitespace(text.charAt(i))) {
+                return text.charAt(i);
+            }
+        }
+        return '\0';
+    }
+
+    private static boolean isElementSeparator(char prev, char next) {
+        return isValueEnd(prev) && isValueStart(next);
+    }
+
+    private static boolean isValueEnd(char c) {
+        return Character.isLetterOrDigit(c) || c == ')' || c == '}' || c == ']';
+    }
+
+    private static boolean isValueStart(char c) {
+        return Character.isLetterOrDigit(c) || c == '(' || c == '{' || c == '[' || c == '-';
     }
 
     private enum AppMode {
